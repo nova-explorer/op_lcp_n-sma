@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # -*- coding: utf-8 -*-
 """ This script will a LAMMPS trajectory in parallel with MPI4PY and calculate the nematic,SmA order parameters.
 
@@ -13,20 +13,15 @@ mpi4py
 pandas
 nematic_sma_OP.py
 
+@modified by Olivier Couture on 20 02 2020
 """
 import numpy as np
 from glob import glob
 from mpi4py import MPI
 from nematic_sma_OP import PO
 
-rank = MPI.COMM_WORLD.Get_rank()
-nprocs = MPI.COMM_WORLD.Get_size()
-first_frame = -2500
-last_frame = -1
-
-
-def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=False, visualize=False, ini_layer_spacing=27.,
-                    gb_type=3, gb_ends_type=2, atoms_per_monomer=13, number_of_monomer=1440, number_of_chains=144):
+def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=True, visualize=False, ini_layer_spacing=35.,
+                    gb_type=3, gb_ends_type=2, atoms_per_monomer=23, number_of_monomer=800, number_of_chains=100, file_pattern='*dump*'):
     """
     This function will open a LAMMPS trajectory in parallel to calculate the SmA and nematic order parameters.
     Each frames are considered independent, and the final results are transmitted to the processor with rank=0
@@ -49,10 +44,12 @@ def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=False, visualize
     Returns:
     ----
     nematic_OP.out(text file): a file with the timestep and the calculated nematic OP
+    EDIT : now returns director too
     sma_OP.out(text file): a file with the timestep, the SmA OP and the optimized layer spacing
     """
     # create a list of all the files in the trajectory
-    complete_trajectory = glob("*dump*")
+    # complete_trajectory = glob("*dump*")
+    complete_trajectory = glob(file_pattern)
     # sort the list
     complete_trajectory.sort(key=lambda f: int(filter(str.isdigit, f)))
 
@@ -67,11 +64,12 @@ def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=False, visualize
         steps_nematic_OP = []
         steps_sma_OP_distance = []
         for dump in trajectory:
+            print(dump)
             po = PO(dump, wrap, visualize, ini_layer_spacing, gb_type, gb_ends_type,
                     atoms_per_monomer, number_of_monomer, number_of_chains)
             # nematic
             step, nematic_OP, director = po.nematic()
-            steps_nematic_OP.append([step, nematic_OP])
+            steps_nematic_OP.append([step, nematic_OP, director[0], director[1]])
             # sma
             step, sma_OP, distance = po.sma()
             steps_sma_OP_distance.append([step, sma_OP, distance])
@@ -96,6 +94,3 @@ def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=False, visualize
         steps_sma_OP_distance = steps_sma_OP_distance[steps_sma_OP_distance[:, 0].argsort(
         )]
         np.savetxt('sma_OP.out', steps_sma_OP_distance)
-
-
-open_trajectory(nprocs, rank, first_frame, last_frame)
