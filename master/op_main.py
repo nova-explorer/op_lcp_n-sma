@@ -1,6 +1,8 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 """
+@author: olivier
+
 Scripts that acts as a main and executable for calculating order paramater.
 
 Usage:

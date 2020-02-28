@@ -1,9 +1,8 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 27 10:11:22 2016
-
 @author: etienne
+
 This function will read a LAMMPS compressed dump (ex:dump.step.gz) and return the step, cell dimensions (x,y,z),
 number of atoms and atoms informations as a dictionnary. The atoms information is a pandas dataframe with the
 atom attributes as columns and id as index
@@ -24,8 +23,6 @@ Limitations:
 Must be only one step per dump
 id must an element of the dump
 
-TODO:
-Adding a function if there are multiple steps per dump
 """
 
 import gzip

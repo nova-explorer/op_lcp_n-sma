@@ -1,6 +1,6 @@
 # Order Parameter for Liquid Crystal Polymers in Nematic and Smectic A mesophases
 
-current version : 1.0
+current version : 1.1
 
 # Known bugs
 * Mpi doesnt work (problem with rank higher than 0). Should be fixed soon, until then use only default values.
@@ -64,5 +64,9 @@ gz12 graphics are saved in png files and op data are saved in text files. The st
 
 # Todo list
 * fix known bugs
-* a way to rename output files
+* op_traj_mpi.py -> a way to rename output files
 * more graphics maybe
+* dump_dataframe.py -> multiple steps per dump
+* nematic_sma_OP -> orientation from quaternion
+* nematic_sma_OP -> multiple ellipsoid type
+* nematic_sma_OP -> automatic reading of atoms_per_monomer and number_of_monomer/number_of_chains

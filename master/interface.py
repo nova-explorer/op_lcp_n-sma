@@ -1,6 +1,9 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 """
+
+@author: olivier
+
 This script makes a generic menu for changing fonction arguments out of a dictionnary.
 
 Usage:

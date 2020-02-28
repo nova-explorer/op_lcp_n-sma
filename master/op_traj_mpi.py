@@ -1,8 +1,10 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
-""" This script will a LAMMPS trajectory in parallel with MPI4PY and calculate the nematic,SmA order parameters.
+"""
 
 @author: etienne
+
+This script will a LAMMPS trajectory in parallel with MPI4PY and calculate the nematic,SmA order parameters.
 
 Usage:
 #change the arguments in the open_trajectory function

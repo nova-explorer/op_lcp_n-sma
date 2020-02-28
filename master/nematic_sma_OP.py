@@ -1,9 +1,8 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 27 10:11:22 2016
-
 @author: etienne
+
 Functions to calculate the nematic order parameter from ordering tensor (see arXiv:1409.3542v2) and
 the smectic A order parameter (see The Journal of chemical physics 138(20), 204901 (2013).)
 from a LAMMPS output with Gay-Berne particles (with pseudo-atoms at the ends) for a liqud crystalline polymer.
@@ -24,10 +23,6 @@ scipy
 dump_dataframe
 matplotlib
 
-TODO:
-Orientation from quaternion
-multiple ellipsoid type
-reading atomatically atoms per monomer and number of molecules
 """
 
 import numpy as np
