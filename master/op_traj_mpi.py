@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """ This script will a LAMMPS trajectory in parallel with MPI4PY and calculate the nematic,SmA order parameters.
 
+@author: etienne
+
 Usage:
 #change the arguments in the open_trajectory function
 mpirun -np NOMBER_OF_PROCS op_traj_mpi.py
@@ -13,7 +15,6 @@ mpi4py
 pandas
 nematic_sma_OP.py
 
-@modified by Olivier Couture on 20 02 2020
 """
 import numpy as np
 from glob import glob

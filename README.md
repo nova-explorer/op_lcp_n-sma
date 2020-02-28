@@ -4,7 +4,8 @@ current version : 1.0
 
 # Known bugs
 * Mpi doesnt work (problem with rank higher than 0). Should be fixed soon, until then use only default values.
-* Script fails if terminal is too small to draw menu. Use a big enough terminal.
+* Script fails if terminal is too small to draw menu. Use a terminal of minimum size 18x97. Check terminal size with stty size
+* For boolean options, anything but False will give True since its converted from string
 
 # Description
 The script works with LAMMPS trajectory files and it calculates orientational order parameter as well as orientational and positional order parameter (along z axis).

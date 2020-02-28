@@ -1,8 +1,19 @@
 #!/usr/bin/python2
+# -*- coding: utf-8 -*-
+"""
+Scripts that acts as a main and executable for calculating order paramater.
 
-'''
+Usage:
+    python2 op_main.py
+    ./op_main.py
 
-'''
+Requirement:
+    python2.7
+    collections
+    
+    interface.py
+    op_traj_mpi.py
+"""
 from collections import OrderedDict
 
 from interface import interface

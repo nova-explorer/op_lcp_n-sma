@@ -1,13 +1,22 @@
 #!/usr/bin/python2
+# -*- coding: utf-8 -*-
+"""
+This script makes a generic menu for changing fonction arguments out of a dictionnary.
 
-import curses #check terminal size error
+Usage:
+run_flag, options = interface(options)
+options is an ordered dict. As of python3, dictionnaries are ordered by default.
+
+Requirement:
+    python2.7 (altough it doesnt seem to have problems running on python3
+    curses
+    OrderedDict
+"""
+
+import curses
 from collections import OrderedDict
 
-# menu = {'nprocs':0, 'rank':1, 'first_frame':-2500, 'last_frame':-1, 'wrap':True, 'visualize':False, 'ini_layer_spacing':35., 'gb_type':3, 'gb_ends':2, 'atoms_per_monomer':23, 'number_of_monomer':800, 'number_of_chains':100, 'file_pattern':'ellipsoid.*.dump.gz', 'Run':'Starts the OP script', 'Quit':'Exits the script now'}
-
-# menu = OrderedDict( [ ('nprocs',0) , ('rank',1) , ('first_frame',-2500) , ('last_frame',-1) , ('wrap',True) , ('visualize',False) , ('ini_layer_spacing',35.) , ('gb_type',3) , ('gb_ends',2) , ('atoms_per_monomer',23) , ('number_of_monomer',800) , ('number_of_chains',100) , ('file_pattern','ellipsoid.*.dump.gz') , ('Run','Starts the OP script') , ('Quit','Exits the script now') ] )
 menu = OrderedDict()
-
 
 def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
@@ -66,6 +75,7 @@ def edit_options(stdscr,row):
 
     row_edit = list(menu.keys())[row]
 
+## Should be put in a more compact format
 ################################################################################################
     if row_edit == 'nprocs':
         try:
@@ -165,7 +175,7 @@ def edit_options(stdscr,row):
 def main(stdscr):
     # turn off cursor blinking
     curses.curs_set(0)
-
+    
     # color scheme for selected row
     ## update color and references
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_YELLOW)
@@ -180,8 +190,8 @@ def main(stdscr):
     # print the menu
     print_menu(stdscr, current_row)
     status_bar(stdscr, "Arrow keys to move, Enter to edit and Enter again to confirm. Reference is called on type error.")
-    
-    while 1:
+
+    while 1: ## perhaps a bit strong
     
         key = stdscr.getch()
         
@@ -210,8 +220,8 @@ def main(stdscr):
 
 def interface(menu_):
 
-    global menu # Not clean  in Python but often seen in other languages. Would be to change
-
+    global menu ## Not clean in Python but often seen in other languages. Would be to change
+    
     menu = menu_
     menu.update(OrderedDict( [
         ('Run', 'Starts op script') ,
