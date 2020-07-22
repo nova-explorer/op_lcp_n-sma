@@ -3,8 +3,8 @@
 current version : 1.1
 
 # Known bugs
-* Mpi doesnt work (problem with rank higher than 0). Should be fixed soon, until then use only default values.
 * Script fails if terminal is too small to draw menu. Use a terminal of minimum size 18x97. Check terminal size with stty size
+* Script cannot draw menu with mpi. Made so it only draws it if 1 processor is used
 * For boolean options, anything but False will give True since its converted from string
 
 # Description

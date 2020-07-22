@@ -86,7 +86,7 @@ def open_trajectory(nprocs, rank, first_frame, last_frame, wrap=True, visualize=
         steps_sma_OP_distance, root=0)
     MPI.COMM_WORLD.barrier()
 
-# rank=0 processor writes the output
+    # rank=0 processor writes the output
     if rank == 0:
         steps_nematic_OP = np.concatenate(steps_nematic_OP)
 
